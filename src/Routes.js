@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Route} from 'react-router-dom'; 
 import SignUp from './signPage/Signup';
-import logIn from "./signPage/logIn"
+import logIn from "./signPage/LogIn"
 import Main from './Main';
 
 class Routes extends Component {

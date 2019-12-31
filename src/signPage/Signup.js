@@ -13,6 +13,7 @@ export default class Signup extends Component {
       email: '',
       password : ''
     };
+    this.ChangeStates = this.ChangeStates.bind(this)
   }
 
     Signup=()=>{
@@ -33,7 +34,6 @@ export default class Signup extends Component {
     }
 
     ChangeStates(e, key){
-      console.log("k", e.target.value)
       this.setState({
         [key] : e.target.value
       })

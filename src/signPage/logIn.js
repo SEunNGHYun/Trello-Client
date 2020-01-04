@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Input, Button} from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {loginCheck} from '../redux/actions';
-import {server} from '../modules';
+import {server, config} from '../utils/modules';
 
 class LogIn extends Component {
 constructor(props){
@@ -24,7 +24,7 @@ constructor(props){
   }
 
   logIn (){
-    axios.post(`${server}/user/login`,this.state,{withCredentials: true})
+    axios.post(`${server}/user/login`,this.state,config)
     .then(res => {
       if(res.status === 200){
         this.props.logincheck();
@@ -46,6 +46,9 @@ constructor(props){
             Password : <Input.Password placeholder='password' onChange={e=>this.ChangeStates(e, 'password')} />
             </div>
             <Button onClick={this.logIn}>로그인 하기
+            </Button>
+            <Button>
+              <Link to='/signup'>회원가입하기</Link>
             </Button>
           </div>
         )

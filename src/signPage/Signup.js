@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Button, Input } from "antd";
 import axios from 'axios';
-import {server} from '../modules';
+import {server} from '../utils/modules';
 
 export default class Signup extends Component {
 
@@ -40,6 +40,7 @@ export default class Signup extends Component {
     }
 
     render() {
+      console.log("???", this.state)
         return (
           <div>
             <div>

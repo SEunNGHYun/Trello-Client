@@ -3,34 +3,33 @@ import {Link} from 'react-router-dom';
 import { Button } from 'antd';
 import axios from'axios';
 import {connect} from 'react-redux';
-import {server} from './modules';
+import {server, config} from './utils/modules';
 import {checkuser, logout} from './redux/actions'
 
- class Main extends Component {
-   
+class Main extends Component {
 
-   componentDidMount(){
-     axios('http://127.0.0.1:4000',{withCredentials: true}).then(res=> {
-       if(res.status ===200){
-         this.props.checkuser();
-       }
-     })
-     .catch(err => {
-       if(err){
-         this.props.history.push('/');
-       }
-     })
-   }
+  componentDidMount(){
+    axios(server,config).then(res=> {
+      if(res.status ===200){
+        this.props.checkuser();
+      }
+    })
+    .catch(err => {
+      if(err){
+        this.props.history.push('/');
+      }
+    })
+  }
 
-   logOut = () => {
-     axios.get(`${server}/user/logout`, {withCredentials: true})
-     .then(res => {
-       if(res.status === 200){
-         this.props.logOut();
-       }
-     }).catch(err => {
-       console.log('로그아웃이 안됨')
-     })
+  logOut = () => {
+    axios.get(`${server}/user/logout`, config)
+    .then(res => {
+      if(res.status === 200){
+        this.props.logOut();
+      }
+    }).catch(err => {
+      console.log('로그아웃이 안됨')
+    })
   }
 
     render() {
@@ -42,19 +41,26 @@ import {checkuser, logout} from './redux/actions'
                 <Button onClick={this.logOut}>
                 로그아웃 
                 </Button>
+                <Link to="/mypage">
+                  <Button>MY PAGE</Button>
+                </Link>
+                <Link to='/boardList'>
+                  <Button>My Boards</Button>
+                </Link>
+                
               </header>
             )
-           : (
-             <header>
+          : (
+            <header>
             메인
-               <Button>
-                 <Link to="/logIn">로그인</Link>
-               </Button>
-               <Button>
-                 <Link to="/signup">회원가입</Link>
-               </Button>
-             </header>
-           )}
+              <Link to="/logIn">
+                <Button>로그인</Button>
+              </Link>
+              <Link to="/signup">
+                <Button>회원가입</Button>
+              </Link>
+            </header>
+          )}
           </div>
         )
     }

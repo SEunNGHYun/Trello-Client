@@ -40,7 +40,6 @@ export default class Signup extends Component {
     }
 
     render() {
-      console.log("???", this.state)
         return (
           <div>
             <div>

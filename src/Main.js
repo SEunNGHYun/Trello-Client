@@ -33,7 +33,6 @@ class Main extends Component {
   }
 
     render() {
-      console.log("?", this.props.login);
         return (
           <div>
             {this.props.login ? (

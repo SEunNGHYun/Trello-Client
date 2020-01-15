@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Route, Link } from "react-router-dom";
+import {Input, Button} from 'antd';
+import { Link } from "react-router-dom";
 import {server, config}from '../utils/modules'
+import AddButton from '../utils/AddButton';
 
 export default class Bordlist extends Component {
-    state = {
-        list : []
+    constructor(props){
+        super(props);
+        this.state = {
+            addToggle : false,
+            list : [],
+            boardTitle :''
+        }
     }
+    
 
     componentDidMount(){
         axios(`${server}/board/list`,config)
@@ -15,6 +23,26 @@ export default class Bordlist extends Component {
             this.setState({
                 list : result
             })
+        })
+    }
+
+    ToggleAdd =()=>{
+        this.setState({
+            addToggle : !this.state.addToggle
+        })
+    }
+
+    titleAdd = (e) => {
+        this.setState({
+            boardTitle : e.target.value
+        })
+    }
+
+    addBoard = () =>{
+        const titleObj = {title : this.state.boardTitle} 
+        axios.post(`${server}/board/create`,titleObj, config)
+        .then(res => {
+            window.location.reload();
         })
     }
 
@@ -36,6 +64,12 @@ export default class Bordlist extends Component {
                 </div>
               )
          })}
+            <AddButton toggle={this.ToggleAdd} />
+            {this.state.addToggle?(
+              <div> <Input onChange={(e)=>this.titleAdd(e)} />
+                <Button onClick={this.addBoard}>추가하기</Button>
+              </div>
+): <p />}
           </div>
         )
     }

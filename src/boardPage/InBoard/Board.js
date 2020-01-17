@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Button, Input } from 'antd';
-import AddButton from '../utils/AddButton';
-import {server,config} from '../utils/modules';
-import Container from '../containerComponts/Container';
-import Edit from '../utils/EditButton';
-import Delete from '../utils/DeleteButton';
+import AddButton from '../../utils/AddButton';
+import {server,config} from '../../utils/modules';
+import Container from '../../containerComponts/Container';
+import Edit from '../../utils/EditButton';
+import Delete from '../../utils/DeleteButton';
 
 export default class Board extends Component {
   constructor(props){

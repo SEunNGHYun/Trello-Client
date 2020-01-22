@@ -40,7 +40,7 @@ export default class CardInputModal extends Component {
               visible={this.props.cardAddToggle}
               onOk={this.connectServer}
               title="추가하기"
-              onCancel={this.props.Click}
+              onCancel={()=>this.props.Click("cardAddToggle")}
               footer={(
                 <div>
                   <Button key="back" onClick={this.props.Click}>

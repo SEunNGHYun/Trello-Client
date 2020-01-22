@@ -1,3 +1,71 @@
+
+.userImage {
+    margin-top: 35px;
+    padding-bottom: 10px;
+}
+.userInfocontents{
+    font-size : 50px;
+}
+.mypage {
+    text-align: center;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+.myPageName{
+    padding-left: 5%;
+    font-size : 70px;
+}
+.TrelloW{
+    font-size : 30px;
+    background-color: salmon
+}
+.Main{
+    padding-top: 30px;
+    padding-left : 30%;
+    padding-right: 30%;
+    font-size : 40px;
+    text-align: center;
+}
+.mainContents{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left : 10%;
+    padding-right: 10%;
+    font-size : 40px;
+    background-color : sandybrown
+}
+.boardName{
+    padding-top: 30px;
+    padding-left : 30%;
+    padding-right: 30%;
+    font-size : 30px;
+    text-align: center;
+}
+.addButton{
+ text-align:center;
+ padding-top: 20px;
+}
+.boardAdd {
+ text-align: center;
+}
 .container{
-   
+    padding : 3%;
+}
+.containers {
+    background-color: grey;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    width: 410px;
+    float: left; 
+}
+.Cards{
+  overflow: auto;
+}
+.signPage {
+    text-align: center;
+    font-size:30px;
+    padding-top: 10%;
+    padding-left: 40%;
+    padding-right: 40%;
 }

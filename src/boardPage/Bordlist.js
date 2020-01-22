@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import {Input, Button} from 'antd';
 import { Link } from "react-router-dom";
+import Head from '../utils/Header';
 import {server, config}from '../utils/modules'
 import AddButton from '../utils/AddButton';
 
@@ -32,13 +33,10 @@ export default class Bordlist extends Component {
         })
     }
 
-    titleAdd = (e) => {
-        this.setState({
-            boardTitle : e.target.value
+    titleAdd = async (value) => {
+        await this.setState({
+            boardTitle : value
         })
-    }
-
-    addBoard = () =>{
         const titleObj = {title : this.state.boardTitle} 
         axios.post(`${server}/board/create`,titleObj, config)
         .then(res => {
@@ -49,9 +47,12 @@ export default class Bordlist extends Component {
     render() {
         return (
           <div>
+            <Head />
+            <p className="myPageName">My Boards</p>
             {this.state.list.map(data =>{
+              console.log("Data", data)
               return (
-                <div key={data.id}>
+                <div key={data.id} className="boardName">
                   <Link to={{
                       pathname : `board/${data.id}`,
                       state : {
@@ -63,11 +64,16 @@ export default class Bordlist extends Component {
                   </Link>
                 </div>
               )
-         })}
+         })} 
             <AddButton toggle={this.ToggleAdd} />
             {this.state.addToggle?(
-              <div> <Input onChange={(e)=>this.titleAdd(e)} />
-                <Button onClick={this.addBoard}>추가하기</Button>
+              <div className="boardAdd"> 
+                <Input.Search
+                  placeholder="board의 이름을 적어주세요"
+                  enterButton="Add"
+                  size="large"
+                  onSearch={value => this.titleAdd(value)}
+                />
               </div>
 ): <p />}
           </div>

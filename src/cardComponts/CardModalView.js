@@ -107,9 +107,9 @@ export default class CardModalView extends Component {
             <Modal
               visible={this.props.cardViewtoggle}
               title={this.state.title}
-              onCancel={this.props.onCancel}
+              onCancel={() => this.props.onCancel("cardViewtoggle")}
               footer={(
-                <Button key="back" onClick={this.props.onCancel}>
+                <Button key="back" onClick={()=>this.props.onCancel("cardViewtoggle")}>
                 Return
                 </Button>
               )}

@@ -4,7 +4,7 @@ import MyPage from './PrivatePages/MyPage';
 import SignUp from './signPage/Signup';
 import logIn from "./signPage/logIn"
 import Main from './Main';
-import Board from './InBoard/Board';
+import Board from './boardPage/InBoard/Board';
 import BoardList from './boardPage/Bordlist';
 
 class Routes extends Component {

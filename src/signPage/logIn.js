@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Input, Button} from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Head from '../utils/beforeHeader';
 import {loginCheck} from '../redux/actions';
 import {server, config} from '../utils/modules';
 
@@ -39,17 +40,22 @@ constructor(props){
     render() {
         return (
           <div>
-            <div>
-            email :  <Input placeholder="aaaa@fffff.com" onChange={(e)=>this.ChangeStates(e, 'email')} />
+            <Head history={this.props.history} />
+            <div className="signPage">
+              <div>
+            email <Input placeholder="aaaa@fffff.com" onChange={(e)=>this.ChangeStates(e, 'email')} />
+              </div>
+              <div>
+            Password <Input.Password placeholder='password' onChange={e=>this.ChangeStates(e, 'password')} />
+              </div>
+              <div style={{ paddingBottom : 10}} />
+              <Button onClick={this.logIn}>로그인
+              </Button>
+              <div style={{ padding : 10}} />
+              <Button>
+                <Link to='/signup'>회원가입</Link>
+              </Button>
             </div>
-            <div>
-            Password : <Input.Password placeholder='password' onChange={e=>this.ChangeStates(e, 'password')} />
-            </div>
-            <Button onClick={this.logIn}>로그인 하기
-            </Button>
-            <Button>
-              <Link to='/signup'>회원가입하기</Link>
-            </Button>
           </div>
         )
     }

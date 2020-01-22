@@ -1,7 +1,8 @@
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react'
 import axios from 'axios';
-import {Button, Input} from'antd';
+import {Button, Input, Avatar, Icon} from'antd';
+import Head from '../utils/beforeHeader';
 import {server, config} from '../utils/modules';
 
 export default class MyPage extends Component {
@@ -63,22 +64,29 @@ export default class MyPage extends Component {
     render() {
         return (
           <div>
-            {this.state.edit ? (
-              <div> 
-                <p>{this.state.email}</p>
-                <Input placeholder="name" onChange={(e)=> this.ChangeState("editName", e)} />    
-                <Input placeholder="password" onChange={(e)=> this.ChangeState("editPassword", e)} />    
-                <Button onClick={this.serverConnect}>수정하기</Button>
-                <Button onClick={this.cancel}>취소하기</Button>     
+            <Head history={this.props.history} />
+            <div className="myPageName">MY Page</div>
+            <div className="mypage">
+              <div className="userImage">
+                <Avatar size={100} icon={<Icon type="user" />} />
               </div>
+              {this.state.edit ? (
+                <div className="userInfocontents"> 
+                  <p>{this.state.email}</p>
+                  <Input placeholder="name" onChange={(e)=> this.ChangeState("editName", e)} />    
+                  <Input placeholder="password" onChange={(e)=> this.ChangeState("editPassword", e)} />    
+                  <Button onClick={this.serverConnect}>수정하기</Button>
+                  <Button onClick={this.cancel}>취소하기</Button>     
+                </div>
 )
             : (
-              <div>
+              <div className="userInfocontents">
                 <p>{this.state.name}</p>
                 <p>{this.state.email}</p>
                 <Button onClick={this.userEdit}>수정하기</Button>
               </div>
           )}
+            </div>
           </div>
         )
     }

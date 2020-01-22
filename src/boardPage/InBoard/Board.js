@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Button, Input } from 'antd';
+import { Button, Input , Col,Row} from 'antd';
+import Head from "../../utils/Header";
 import AddButton from '../../utils/AddButton';
 import {server,config} from '../../utils/modules';
 import Container from '../../containerComponts/Container';
@@ -45,17 +46,18 @@ export default class Board extends Component {
   
   ChangeState = (key) => {
     return this.setState({
-      [key] : !this.state.key
+      [key] : !this.state[key]
     })
   }
 
-  onChange = (e, key) => {
+  onChange = async(value, key) => {
     const container = {
-      title : e.target.value
+      title : value
     }
-    this.setState({
+    await this.setState({
       [key] : container
     })
+    this.connectServer();
   }
 
   connectServer =()=> {
@@ -64,11 +66,6 @@ export default class Board extends Component {
     axios.post(`${server}/container/create?board_id=${id}`,this.state.addcontainer, config)
     .then(res=>{
       window.location.reload();
-      // const Addcontainer = this.state.containers.concat(res.data.result);
-      // this.setState({
-      //   containers : Addcontainer
-      // });
-      // this.ChangeState('add');
     })
   }else{
     alert("입력하세요")
@@ -77,8 +74,10 @@ export default class Board extends Component {
 
   delete = ()=>{
     const {id} = this.props.match.params;
+    console.log("delete", id);
     axios.delete(`${server}/board/delete/${id}`, config)
     .then(res=>{
+      console.log("res delete board", res);
     if(res.status ===204)
      this.props.history.push('/boardList');
     })
@@ -102,30 +101,43 @@ export default class Board extends Component {
       const {title} = this.props.location.state;
         return (
           <div>
+            <Head />
             <div>
-              {this.state.edit ? (
-                <div>
-                  <Input placeholder={title} onChange={(e) => this.onChange(e, 'Boardtitle')} /> 
-                  <Button onClick={this.editButton}>수정하기</Button> 
-                </div>
-            ): <h1>{this.state.Boardtitle}</h1>}
-              <Edit confirm={this.ChangeState} />   <Delete confirm={this.delete} />
-            </div> 
-            {this.state.containers === null ? <h1>비어있습니다.</h1> : 
+              <div>
+                {this.state.edit ? (
+                  <div>
+                    <Input placeholder={title} onChange={(e) => this.onChange(e, 'Boardtitle')} /> 
+                    <Button onClick={this.editButton}>수정하기</Button> 
+                  </div>
+            ): <div style={{fontSize : "40px", paddingLeft: "10px", paddingBottom: "10px"}}>{this.state.Boardtitle}</div>}
+                <Edit confirm={this.ChangeState} />   <Delete confirm={this.delete} />
+              </div>
+              <Row style={{paddingLeft : "20px", paddingBottom : "10px"}} gutter={20}>
+                {this.state.containers === null ? <h1>비어있습니다.</h1> : 
             this.state.containers.map((container)=> {
               return(
-                <div key={container.id}>
-                  <Container title={container.title} containerId={container.id} />
-                </div>
+                <Col span={6}>
+                  <span styke={{ paddingLeft : "10px", paddingBottom : "10px"}} key={container.id}>
+                    <Container title={container.title} containerId={container.id} />
+                  </span>
+                </Col>
               )}
             )}
-            <AddButton toggle={()=>this.ChangeState('add')} name='container' />
-            {this.state.add ? (
-              <div>
-                <Input onChange={(e) =>this.onChange(e, 'addcontainer')} placeholder="제목" />
-                <Button onClick={this.connectServer}>추가하기</Button>
-              </div>
+              </Row> 
+            </div>
+            <div style={{float : "bottom"}}>
+              <AddButton toggle={()=>this.ChangeState('add')} name='container' />
+              {this.state.add ? (
+                <div className="mypage">
+                  <Input.Search
+                    placeholder="container의 이름을 적어주세요"
+                    enterButton="Add"
+                    size="large"
+                    onSearch={value => this.onChange(value, "addcontainer")}
+                  />
+                </div>
           ) : <div />}
+            </div>
           </div>
         )}
 }

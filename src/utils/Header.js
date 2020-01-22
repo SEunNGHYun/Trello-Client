@@ -6,8 +6,6 @@ import {connect} from 'react-redux';
 import {server, config} from './modules';
 import {logout} from '../redux/actions'
 
-
-
 class Header extends Component {
     logOut = () => {
         axios.get(`${server}/user/logout`, config)
@@ -24,7 +22,7 @@ class Header extends Component {
         return (
           <header className="TrelloW">
             TrelloW
-            <span style={{marginLeft : "80%"}}>
+            <span style={{marginLeft : "74%"}}>
               <Button type="link" ghost onClick={this.logOut}>
                 로그아웃 
               </Button>

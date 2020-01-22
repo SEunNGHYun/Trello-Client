@@ -2,10 +2,12 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Button, Input, Avatar, Icon} from'antd';
+import {connect} from 'react-redux';
 import Head from '../utils/beforeHeader';
-import {server, config} from '../utils/modules';
+import {server, config} from '../utils/modules'
+import {logout} from '../redux/actions';
 
-export default class MyPage extends Component {
+class MyPage extends Component {
     state = {
         name : '',
         email : '',
@@ -61,6 +63,17 @@ export default class MyPage extends Component {
         window.location.reload();
     }
 
+    userDelete = () => {
+        alert("정말 삭제하시겠습니끼?")
+        axios.delete(`${server}/user/delete`, config)
+        .then(res => {
+            if(res.status === 200){
+            this.props.logOut();
+            this.props.history.push('/');
+            }
+        })
+    }
+
     render() {
         return (
           <div>
@@ -84,6 +97,7 @@ export default class MyPage extends Component {
                 <p>{this.state.name}</p>
                 <p>{this.state.email}</p>
                 <Button onClick={this.userEdit}>수정하기</Button>
+                <Button onClick={this.userDelete}>탈퇴하기</Button>
               </div>
           )}
             </div>
@@ -91,3 +105,11 @@ export default class MyPage extends Component {
         )
     }
 }
+
+const PropsState = state => ({
+    login : state.login
+  })
+  const mapDispatchToProps = dispatch => ({
+    logOut : () => dispatch(logout())
+  });
+  export default connect(PropsState, mapDispatchToProps)(MyPage)

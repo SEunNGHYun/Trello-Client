@@ -51,12 +51,19 @@ export default class Board extends Component {
   }
 
   onChange = async(e, key) => {
-    const container = {
-      title : e.target.value
-    }
+    if(key === "Boardtitle"){
     await this.setState({
-      [key] : container
-    })
+      [key] : e.target.value
+    })}
+    else{
+      const container = {
+        title : e
+      }
+      await this.setState({
+        [key] : container
+      })
+      this.connectServer()
+    }
   }
 
   connectServer =()=> {

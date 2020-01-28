@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import {Button, Input, Avatar, Icon} from'antd';
 import {connect} from 'react-redux';
-import Head from '../utils/beforeHeader';
+import Head from '../utils/Header';
 import {server, config} from '../utils/modules'
 import {logout} from '../redux/actions';
 

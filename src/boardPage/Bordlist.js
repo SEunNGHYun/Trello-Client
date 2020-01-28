@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import {Input, Button} from 'antd';
+import {Input} from 'antd';
 import { Link } from "react-router-dom";
 import Head from '../utils/Header';
 import {server, config}from '../utils/modules'
@@ -45,9 +45,10 @@ export default class Bordlist extends Component {
     }
 
     render() {
+      console.log("history", this.props.history);
         return (
           <div>
-            <Head />
+            <Head history={this.props.history} />
             <p className="myPageName">My Boards</p>
             {this.state.list.map(data =>{
               console.log("Data", data)

@@ -12,11 +12,11 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path='/' component={Main} />
-        <Route path='/mypage' component={MyPage} />
-        <Route path='/signup' component={SignUp} />
-        <Route path='/logIn' component={logIn} />
-        <Route path='/boardList' component={BoardList} />
-        <Route path="/board/:id" component={Board} />
+        <Route exact path='/mypage' component={MyPage} />
+        <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/logIn' component={logIn} />
+        <Route exact path='/boardList' component={BoardList} />
+        <Route exact path="/board/:id" component={Board} />
       </div>
     )}
 }

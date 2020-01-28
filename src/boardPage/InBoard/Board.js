@@ -52,7 +52,8 @@ export default class Board extends Component {
 
   onChange = async(e, key) => {
     if(key === "Boardtitle"){
-    await this.setState({
+      console.log("??", e.target.value);
+    this.setState({
       [key] : e.target.value
     })}
     else{
@@ -95,11 +96,14 @@ export default class Board extends Component {
     axios.patch(`${server}/board/edit/${id}`,Title, config)
     .then(res => {
       console.log("Res", res);
+      if(res.status === 204){
       const boardTitle = Title.title;
+      console.log("Res", boardTitle);
       this.setState({
-        Boardtitle: boardTitle.title,
+        Boardtitle: boardTitle,
         edit : false
       })
+    }
 
     })
   }
@@ -108,7 +112,7 @@ export default class Board extends Component {
       const {title} = this.props.location.state;
         return (
           <div>
-            <Head />
+            <Head history={this.props.history} />
             <div>
               <div>
                 {this.state.edit ? (
@@ -119,14 +123,14 @@ export default class Board extends Component {
             ): <div style={{fontSize : "40px", paddingLeft: "10px", paddingBottom: "10px"}}>{this.state.Boardtitle}</div>}
                 <Edit confirm={this.ChangeState} />   <Delete confirm={this.delete} />
               </div>
-              <Row style={{paddingLeft : "20px", paddingBottom : "10px"}} gutter={20}>
+              <Row style={{paddingLeft : "5%"}} gutter={20}>
                 {this.state.containers === null ? <h1>비어있습니다.</h1> : 
             this.state.containers.map((container)=> {
               return(
-                <Col span={6}>
-                  <span styke={{ paddingLeft : "10px", paddingBottom : "10px"}} key={container.id}>
+                <Col className="containers" span={6}>
+                  <div key={container.id}>
                     <Container title={container.title} containerId={container.id} />
-                  </span>
+                  </div>
                 </Col>
               )}
             )}

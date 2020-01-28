@@ -50,14 +50,13 @@ export default class Board extends Component {
     })
   }
 
-  onChange = async(value, key) => {
+  onChange = async(e, key) => {
     const container = {
-      title : value
+      title : e.target.value
     }
     await this.setState({
       [key] : container
     })
-    this.connectServer();
   }
 
   connectServer =()=> {
@@ -88,6 +87,7 @@ export default class Board extends Component {
     const {id} = this.props.match.params
     axios.patch(`${server}/board/edit/${id}`,Title, config)
     .then(res => {
+      console.log("Res", res);
       const boardTitle = Title.title;
       this.setState({
         Boardtitle: boardTitle.title,

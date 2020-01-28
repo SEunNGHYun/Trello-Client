@@ -60,10 +60,9 @@ export default class Container extends Component {
     }
 
     render() {
-        console.log("this.sta", this.state);
-        const {cardViewtoggle, cardAddToggle} = this.state;
+      const {cardViewtoggle, cardAddToggle} = this.state;
         return (
-          <div className="containers">
+          <span className="container">
             <Card
               style={{width : 400, height : 230 }}
             >
@@ -98,7 +97,7 @@ export default class Container extends Component {
                 <Icon type='plus' onClick={()=>this.toggle("cardAddToggle")} />
               </div>
             </Card>
-          </div>
+          </span>
         )
     }
 }

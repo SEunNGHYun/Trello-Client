@@ -48,19 +48,21 @@
 .boardAdd {
  text-align: center;
 }
-.container{
-    padding : 3%;
+.container{  
+     margin: 10px;
+     background-color: grey;
+
 }
 .containers {
-    background-color: grey;
     padding-left: 5px;
+    margin: 10px;
     padding-top: 5px;
     padding-bottom: 4px;
     width: 410px;
     float: left; 
 }
 .Cards{
-  overflow: auto;
+    overflow: auto;
 }
 .signPage {
     text-align: center;

@@ -12,6 +12,7 @@ class Header extends Component {
         .then(res => {
           if(res.status === 200){
             this.props.logOut();
+            this.props.history.push('/');
           }
         }).catch(err => {
           console.log('로그아웃이 안됨')

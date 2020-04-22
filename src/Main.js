@@ -31,15 +31,19 @@ class Main extends Component {
                 TrelloW
               </header>
               <div className="Main">
+                <div className="Main_Container">
                 <div className="mainContents">
-                  자신의 할 일을 적어보세요
+                  자신의 할 일을 관리해보세요
                 </div>
+                <div ClassName="logSignButton">
                 <Link to="/logIn">
                   <Button>로그인</Button>
                 </Link>
                 <Link to="/signup">
                   <Button>회원가입</Button>
                 </Link>
+                </div>
+              </div>
               </div>
             </div>
           )}

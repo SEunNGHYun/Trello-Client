@@ -7,7 +7,12 @@ import {server, config} from './modules';
 import {logout} from '../redux/actions'
 
 class Header extends Component {
-    logOut = () => {
+  constructor(props){
+    super(props);
+    this.logOut = this.logOut.bind(this);
+  }
+  
+  logOut (){
         axios.get(`${server}/user/logout`, config)
         .then(res => {
           if(res.status === 200){

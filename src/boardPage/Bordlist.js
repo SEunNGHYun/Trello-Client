@@ -22,6 +22,7 @@ export default class Bordlist extends Component {
         .then(res =>{
             const result = res.data.list;
             this.setState({
+              ...this.state,
                 list : result
             })
         })
@@ -29,12 +30,14 @@ export default class Bordlist extends Component {
 
     ToggleAdd =()=>{
         this.setState({
+           ...this.state,
             addToggle : !this.state.addToggle
         })
     }
 
     titleAdd = async (value) => {
         await this.setState({
+          ...this.state,
             boardTitle : value
         })
         const titleObj = {title : this.state.boardTitle} 

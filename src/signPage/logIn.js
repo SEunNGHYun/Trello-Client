@@ -28,11 +28,11 @@ constructor(props){
     axios.post(`${server}/user/login`,this.state,config)
     .then(res => {
       console.log("Res", res);
-      if(res.status === 200){
+      if(res.status === 201){
         this.props.logincheck();
         this.props.history.push('/')
       }else{
-        alert("존재하는 email입니다")
+        alert("로그인 정보를 다시 확인해주세요")
       }
     })
     .catch((err)=> {
